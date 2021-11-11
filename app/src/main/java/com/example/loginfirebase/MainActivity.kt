@@ -3,7 +3,9 @@ package com.example.loginfirebase
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,8 +17,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        btnRegisterMain.setOnClickListener {
-            startActivity(Intent(this, RegistroActivity::class.java))
-        }
     }
 }

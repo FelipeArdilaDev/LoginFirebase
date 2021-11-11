@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
     private val GOOGLE_SIGN_IN = 100
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -72,21 +71,23 @@ class LoginActivity : AppCompatActivity() {
     private fun setup() {
         title = "Autenticacion"
         loginButton.setOnClickListener {
-            if (emailEt.editText?.text!!.isNotEmpty() && passWordet_.editText?.text!!.isNotEmpty()) {
+
+            if (emailEt.text!!.isNotEmpty() && passWordet.text!!.isNotEmpty()) {
+
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(
-                        emailEt.editText?.text.toString(),
-                        passWordet_.editText?.text.toString()
+                        emailEt.text.toString(),
+                        passWordet.text.toString()
                     ).addOnCompleteListener {
+
                         if (it.isSuccessful) {
                             showHome(it.result?.user?.email ?: "", ProviderType.EMAIL_PASSWORD)
-
                         } else {
                             showAlert()
-
                         }
                     }
             }
+
 
         }
 

@@ -5,8 +5,7 @@
     android:id="@+id/authLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    >
+    tools:context=".LoginActivity">
 
 
     <LinearLayout
@@ -14,6 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="32dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,17 +22,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passWordet."
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email Address"
             app:endIconContentDescription="@string/content_description_end_icon"
             app:endIconDrawable="@drawable/ic_email"
             app:endIconMode="custom"
-            app:helperTextEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -40,7 +40,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailEt"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -50,42 +50,37 @@
             app:endIconContentDescription="@string/content_description_end_icon"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passWordet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/loginButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Ingresar" />
+
+
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="162dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/botton"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageButton
         android:id="@+id/googleButton"
         android:layout_width="54dp"
         android:layout_height="52dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_google"
         android:text="GOOGLE"
-        app:layout_constraintStart_toEndOf="@+id/loginButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/googlebutton"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -94,15 +89,15 @@
         android:id="@+id/FacebookButton"
         android:layout_width="54dp"
         android:layout_height="52dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_google"
         android:text="FACEBOOK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toEndOf="@+id/googleButton"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/ic_facebook"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
 
     <Button
         android:id="@+id/btnRegister"
@@ -111,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="4dp"
-        android:text="Text button"
+        android:text="Registrate !"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -129,7 +124,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -142,8 +136,9 @@
         android:text="Hola de nuevo!"
         android:textColor="@color/gray"
         android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backImage" />
 
