@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LoginFirebase</string>
+    <string name="toast_text">Lo sentimos la app esta fallando</string>
+    <string name="prefs_file">com.example.loginfirebase.PREFERENCE_FILE_KEY</string>
+    <string name="default_id" translatable="false">172961833549-r0mbtfu6u199pehhaodr0nnovn99l9e5.apps.googleusercontent.com</string>
+    <string name="content_description_end_icon" />
+    <string name="registro">Registro</string>
+</resources>
