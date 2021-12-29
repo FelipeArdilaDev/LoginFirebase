@@ -4,13 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginfirebase.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_registro.*
 
 class RegistroActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityRegistroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registro)
+        binding = ActivityRegistroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Setup
         setup()
@@ -19,11 +22,11 @@ class RegistroActivity : AppCompatActivity() {
     private fun setup() {
         title = "Autenticacion"
 
-        signUpButton.setOnClickListener {
-            if (etEmail.text.isNotEmpty() && etPassword.text.isNotEmpty()) {
+        binding.signUpButton.setOnClickListener {
+            if (binding.etEmail.text!!.isNotEmpty() && binding.etPassword.text!!.isNotEmpty()) {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    etEmail.text.toString(),
-                    etPassword.text.toString()
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showHome(it.result?.user?.email ?: "", ProviderType.EMAIL_PASSWORD)

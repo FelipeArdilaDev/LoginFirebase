@@ -3,8 +3,8 @@ package com.example.loginfirebase
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginfirebase.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_home.*
 
 enum class ProviderType {
     EMAIL_PASSWORD,
@@ -13,9 +13,12 @@ enum class ProviderType {
 }
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Setup
         val bundle: Bundle? = intent.extras
@@ -34,10 +37,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setup(email: String, provider: String) {
         title = "Inicio"
-        tvEmail.text = email
-        tvPass.text = provider
+        binding.tvEmail.text = email
+        binding.tvPass.text = provider
 
-        logOutButton.setOnClickListener {
+        binding.logOutButton.setOnClickListener {
 
             // Borrado de datos
 

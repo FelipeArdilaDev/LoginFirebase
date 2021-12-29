@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginfirebase.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,16 +16,18 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
 
     private val GOOGLE_SIGN_IN = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Analytics Event
         val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -36,48 +39,49 @@ class LoginActivity : AppCompatActivity() {
         setup()
         session()
 
-        backImage.setOnClickListener {
+        binding.backImage.setOnClickListener {
             finish()
         }
 
-        btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
         }
 
-        authLayout.setOnClickListener { v ->
+        binding.authLayout.setOnClickListener { v ->
             hideKeyboard(v)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        authLayout.visibility = View.VISIBLE
+        binding.authLayout.visibility = View.VISIBLE
 
 
     }
 
     private fun session() {
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences(getString(R.string.prefs_file),
+            Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
         val provider = prefs.getString("provider", null)
 
         if (email != null && provider != null) {
-            authLayout.visibility = View.INVISIBLE
+            binding.authLayout.visibility = View.INVISIBLE
             showHome(email, ProviderType.valueOf(provider))
         }
     }
 
     private fun setup() {
         title = "Autenticacion"
-        loginButton.setOnClickListener {
+        binding.loginButton.setOnClickListener {
 
-            if (emailEt.text!!.isNotEmpty() && passWordet.text!!.isNotEmpty()) {
+            if (binding.emailEt.text!!.isNotEmpty() && binding.passWordet.text!!.isNotEmpty()) {
 
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(
-                        emailEt.text.toString(),
-                        passWordet.text.toString()
+                        binding.emailEt.text.toString(),
+                        binding.passWordet.text.toString()
                     ).addOnCompleteListener {
 
                         if (it.isSuccessful) {
@@ -91,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        googleButton.setOnClickListener {
+        binding.googleButton.setOnClickListener {
             // COnfirguracion
             val googleConf: GoogleSignInOptions =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -125,7 +129,8 @@ class LoginActivity : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
 
                 if (account != null) {
-                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    val credential = GoogleAuthProvider.getCredential(account.idToken,
+                        null)
 
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener {
